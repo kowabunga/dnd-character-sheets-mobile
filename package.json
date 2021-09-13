@@ -1,0 +1,22 @@
+{
+  "name": "dnd_mobile",
+  "version": "1.0.0",
+  "description": "website for creating, updating, and accessing dnd character sheets",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server/server.js"
+  },
+  "author": "Anthony Siletti",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.5"
+  },
+  "devDependencies": {
+    "colors": "^1.4.0",
+    "nodemon": "^2.0.12"
+  },
+  "type": "module"
+}
