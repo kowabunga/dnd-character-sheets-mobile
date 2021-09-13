@@ -51,7 +51,7 @@ export async function createUser(req, res) {
 //Catch all function for any user update
 export async function updateUser(req, res) {
   try {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, email, password, confirmPassword, oldPassword } = req.body;
 
     const user = await User.findById(req.user);
 
@@ -64,8 +64,12 @@ export async function updateUser(req, res) {
     if (name) user.name = name;
     if (email) user.email = email;
 
-    //@TODO check if password===currentpassword, then do this
-    if (password) user.password = password;
+    //Check if password is to be changed. If so, compare new password to old password. If it matches, update password
+    if (password) {
+      const passwordMatch = user.checkPassword(oldPassword);
+      if (passwordMatch && password === confirmPassword)
+        user.password = password;
+    }
 
     //Save updates to db
     user.save();
