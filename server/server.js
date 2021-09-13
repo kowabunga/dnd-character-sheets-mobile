@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 
 import connectDb from './config/db.js';
+import userRoutes from './api/routes/user.js';
+import authRoutes from './api/routes/auth.js';
 
 dotenv.config({ path: 'server/config/config.env' });
 
@@ -11,6 +13,9 @@ connectDb();
 const app = express();
 
 app.use(express.json({ extended: true }));
+
+app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 8080;
 
