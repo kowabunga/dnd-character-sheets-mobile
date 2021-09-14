@@ -79,3 +79,18 @@ export async function updateUser(req, res) {
     res.status(500).send('Server error');
   }
 }
+
+export async function deleteUser(req, res) {
+  try {
+    const user = await User.findById(req.user);
+
+    if (!user)
+      return res.status(400).json({ msg: 'User does not exist. Sign up' });
+
+    await user.delete();
+    res.status(200).json({ msg: 'Account deleted' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+}
