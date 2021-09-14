@@ -1,5 +1,5 @@
 import express from 'express';
-import checkJwt from '../../middleware/jwt.js';
+import { checkJwt } from '../../middleware/jwt.js';
 import {
   getAllCharacterSheets,
   createCharacterSheet,

@@ -40,7 +40,7 @@ export async function createCharacterSheet(req, res) {
 
     characterSheet.save();
 
-    console.log(characterSheet);
+    res.status(201).json(characterSheet);
   } catch (error) {
     console.error(error);
     res.status(500).json('Server Error');

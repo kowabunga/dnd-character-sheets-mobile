@@ -5,6 +5,7 @@ import colors from 'colors';
 import connectDb from './config/db.js';
 import userRoutes from './api/routes/user.js';
 import authRoutes from './api/routes/auth.js';
+import characterRoutes from './api/routes/characerSheet.js';
 
 dotenv.config({ path: 'server/config/config.env' });
 
@@ -16,6 +17,7 @@ app.use(express.json({ extended: true }));
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/character', characterRoutes);
 
 const PORT = process.env.PORT || 8080;
 

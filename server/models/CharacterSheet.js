@@ -15,9 +15,12 @@ const SpellSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Name is required for this spell'],
   },
-  damage: {
+  description: {
     type: String,
-    required: [true, 'Please enter a value similar to the following: "3d5"'],
+    required: [
+      true,
+      'Please enter something that helps you remember the spell. E.g., "5ft cone, 3d8 damage"',
+    ],
   },
 });
 
@@ -74,23 +77,22 @@ const CharacterSheetSchema = new mongoose.Schema({
     intelligence: { type: Number, required: true, default: 0, max: 20, min: 0 },
     wisdom: { type: Number, required: true, default: 0, max: 20, min: 0 },
     charisma: { type: Number, required: true, default: 0, max: 20, min: 0 },
-    armor: { type: Number, required: true, default: 0, max: 20, min: 0 },
-    initiative: { type: Number, required: true, default: 0, max: 20, min: 0 },
-    speed: { type: Number, required: true, default: 0, max: 20, min: 0 },
-    maxHealth: { type: Number, required: true, default: 0, max: 20, min: 0 },
+    armor: { type: Number, required: true, default: 0, min: 0 },
+    initiative: { type: Number, required: true, default: 0, min: 0 },
+    speed: { type: Number, required: true, default: 0, min: 0 },
+    maxHealth: { type: Number, required: true, default: 0, min: 0 },
     currentHealth: {
       type: Number,
       required: true,
       default: 0,
-      max: 20,
+
       min: 0,
     },
-    tempHealth: { type: Number, required: true, default: 0, max: 20, min: 0 },
+    tempHealth: { type: Number, required: true, default: 0, min: 0 },
     passiveWisdom: {
       type: Number,
       required: true,
       default: 0,
-      max: 20,
       min: 0,
     },
   },

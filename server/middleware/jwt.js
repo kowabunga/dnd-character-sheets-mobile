@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+
 export function checkJwt(req, res, next) {
   //Grab token from header
   //User must be logged in for this to work
