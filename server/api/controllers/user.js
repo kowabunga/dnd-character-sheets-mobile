@@ -34,10 +34,7 @@ export async function createUser(req, res) {
     if (password !== confirmPassword)
       return res.status(400).json({ msg: 'Passwords do not match.' });
 
-    //Create user
-    user = new User({ name, email, password });
-
-    user.save();
+    user = await User.create({ name, email, password });
 
     const token = signJwt({ userId: user._id });
 
@@ -65,7 +62,7 @@ export async function updateUser(req, res) {
     if (email) user.email = email;
 
     //Check if password is to be changed. If so, compare new password to old password. If it matches, update password
-    if (password) {
+    if (oldPassword) {
       const passwordMatch = user.checkPassword(oldPassword);
       if (passwordMatch && password === confirmPassword)
         user.password = password;

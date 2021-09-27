@@ -11,35 +11,16 @@ export async function getAllCharacterSheets(req, res) {
 
 export async function createCharacterSheet(req, res) {
   try {
-    const {
-      characterName,
-      characterClass,
-      characterLevel,
-      experiencePoints,
-      skills,
-      mainStats,
-      attackStats,
-      equipment,
-      otherProficienciesAndLanguages,
-      featuresAndTraits,
-      spells,
-    } = req.body;
-    let characterSheet = new CharacterSheet({
-      characterName,
-      characterClass,
-      characterLevel,
-      experiencePoints,
-      skills,
-      mainStats,
-      attackStats,
-      equipment,
-      otherProficienciesAndLanguages,
-      featuresAndTraits,
-      spells,
-    });
+    const user = await User.findById(req.user);
 
-    characterSheet.save();
+    if (!user) {
+      return res.status(400).json({ msg: 'No user found' });
+    }
 
+    let characterSheet = await CharacterSheet.create(req.body);
+
+    //@TODO add reference to new character to user character list
+    // User.
     res.status(201).json(characterSheet);
   } catch (error) {
     console.error(error);
