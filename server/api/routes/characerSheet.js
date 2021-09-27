@@ -1,9 +1,6 @@
 import express from 'express';
 import { checkJwt } from '../../middleware/jwt.js';
-import {
-  getAllCharacterSheets,
-  createCharacterSheet,
-} from '../controllers/characterSheet.js';
+import { createCharacterSheet } from '../controllers/characterSheet.js';
 
 const router = express.Router();
 
@@ -11,9 +8,6 @@ const router = express.Router();
 // @desc Get all character sheet names/ids
 // @access private
 
-router
-  .route('/')
-  .get(checkJwt, getAllCharacterSheets)
-  .post(checkJwt, createCharacterSheet);
+router.route('/').post(checkJwt, createCharacterSheet);
 
 export default router;

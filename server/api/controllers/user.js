@@ -1,4 +1,5 @@
 import User from '../../models/User.js';
+import CharacterSheet from '../../models/CharacterSheet.js';
 import { signJwt } from '../../utils/jwt.js';
 
 export async function fetchUser(req, res) {
@@ -9,8 +10,9 @@ export async function fetchUser(req, res) {
       .select('_id name email')
       .populate('characters');
 
-    if (!user)
+    if (!user) {
       return res.status(400).json({ msg: 'Email not registered. Sign up' });
+    }
 
     return res.status(200).json(user);
   } catch (error) {
@@ -26,13 +28,15 @@ export async function createUser(req, res) {
     //Check if user already exists
     let user = await User.findOne({ email });
 
-    if (user)
+    if (user) {
       return res
         .status(400)
         .json({ msg: 'Already registered. Log in instead' });
+    }
 
-    if (password !== confirmPassword)
+    if (password !== confirmPassword) {
       return res.status(400).json({ msg: 'Passwords do not match.' });
+    }
 
     user = await User.create({ name, email, password });
 
@@ -86,6 +90,51 @@ export async function deleteUser(req, res) {
 
     await user.delete();
     res.status(200).json({ msg: 'Account deleted' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+}
+
+export async function fetchAllCharacterSheets(req, res) {
+  try {
+    const user = await User.findById(req.user);
+
+    if (!user) {
+      return res.status(400).json({ msg: 'User not found' });
+    }
+
+    const characterSheets = await CharacterSheet.find().select(
+      '_id characterName characterClass characterLevel'
+    );
+
+    if (characterSheets.length === 0) {
+      return res.status(404).json({ msg: 'No character sheets found' });
+    }
+
+    res.status(200).json(characterSheets);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
+  }
+}
+
+export async function fetchCharacterSheetbyId(req, res) {
+  try {
+    const user = await User.findById(req.user);
+
+    if (!user) {
+      return res.status(400).json({ msg: 'User not found' });
+    }
+
+    const characterSheet = await CharacterSheet.findById(req.params.id);
+
+    if (!characterSheet) {
+      return res
+        .status(400)
+        .json({ msg: 'Cannot find charactersheet by provided id' });
+    }
+    res.status(200).json(characterSheet);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server Error');

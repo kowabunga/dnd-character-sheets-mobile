@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
   characters: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'user',
+      ref: 'charactersheet',
     },
   ],
   passwordResetToken: {
