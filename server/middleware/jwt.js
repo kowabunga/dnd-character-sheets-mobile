@@ -17,6 +17,6 @@ export function checkJwt(req, res, next) {
     req.user = verifiedToken.userId;
     next();
   } catch (error) {
-    return res.status(401).json({ msg: 'No token, unauthorized' });
+    return res.status(401).json({ msg: 'Invalid token, unauthorized' });
   }
 }

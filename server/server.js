@@ -7,6 +7,7 @@ import userRoutes from './api/routes/user.js';
 import authRoutes from './api/routes/auth.js';
 import characterRoutes from './api/routes/characerSheet.js';
 
+
 dotenv.config({ path: 'server/config/config.env' });
 
 connectDb();

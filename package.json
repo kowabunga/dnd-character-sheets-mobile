@@ -4,6 +4,7 @@
   "description": "website for creating, updating, and accessing dnd character sheets",
   "main": "server.js",
   "scripts": {
+    "test": "mocha",
     "dev": "nodemon server/server.js"
   },
   "author": "Anthony Siletti",
