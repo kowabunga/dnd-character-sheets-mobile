@@ -42,7 +42,7 @@ export async function createUser(req, res) {
 
     const token = signJwt({ userId: user._id });
 
-    res.status(200).json({ user, token });
+    res.status(201).json({ user, token });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
