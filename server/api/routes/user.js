@@ -6,6 +6,7 @@ import {
   updateUser,
   fetchAllCharacterSheets,
   fetchCharacterSheetbyId,
+  devDeleteTestUser,
 } from '../controllers/user.js';
 import { checkJwt } from '../../middleware/jwt.js';
 
@@ -21,5 +22,7 @@ router
 router.route('/character').get(checkJwt, fetchAllCharacterSheets);
 
 router.route('/character/:id').get(checkJwt, fetchCharacterSheetbyId);
+
+router.route('/dev').delete(devDeleteTestUser);
 
 export default router;

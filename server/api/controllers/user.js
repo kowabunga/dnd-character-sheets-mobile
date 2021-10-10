@@ -42,7 +42,13 @@ export async function createUser(req, res) {
 
     const token = signJwt({ userId: user._id });
 
-    res.status(201).json({ user, token });
+    res.status(201).json({
+      createdUser: {
+        name: user.name,
+        email: user.email,
+      },
+      token,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
@@ -139,4 +145,14 @@ export async function fetchCharacterSheetbyId(req, res) {
     console.error(error);
     res.status(500).send('Server Error');
   }
+}
+
+//For testing!
+export async function devDeleteTestUser(req, res) {
+  try {
+    await User.findOneAndDelete({ email: 'testUpdated@test.com' });
+  } catch (error) {
+    console.error(error);
+  }
+  res.status(200).send('Done');
 }

@@ -5,4 +5,12 @@ const createUserData = {
   confirmPassword: '123456',
 };
 
-export { createUserData };
+const updatedUserData = {
+  name: 'Testerton Test',
+  password: '123456',
+  confirmPassword: '123456',
+  oldPassword: 'ggagaga',
+  email: 'testUpdated@test.com',
+};
+
+export { createUserData, updatedUserData };
