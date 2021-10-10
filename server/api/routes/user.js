@@ -19,6 +19,8 @@ router
   .put(checkJwt, updateUser)
   .delete(checkJwt, deleteUser);
 
+
+
 router.route('/character').get(checkJwt, fetchAllCharacterSheets);
 
 router.route('/character/:id').get(checkJwt, fetchCharacterSheetbyId);
