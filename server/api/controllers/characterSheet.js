@@ -59,7 +59,9 @@ export async function getCharacterSheet(req, res) {
 
     res.status(200).json(characterSheet);
   } catch (error) {
-    console.error(error);
+    if (error.kind === 'ObjectId') {
+      return res.status(400).json({ msg: 'Invalid character sheet id' });
+    }
     res.status(500).json('Server Error');
   }
 }
@@ -103,10 +105,9 @@ export async function deleteCharacterSheet(req, res) {
 }
 
 export async function devDeleteCharacterSheet(req, res) {
+  console.log('request hit here');
   try {
-    // await CharacterSheet.deleteMany({});
-
-    await CharacterSheet.findOneAndDelete({ characterName: 'Test Character' });
+    await CharacterSheet.deleteMany({});
   } catch (error) {
     console.error(error);
   }

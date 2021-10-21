@@ -15,11 +15,11 @@ router
   .route('/')
   .get(checkJwt, getAllCharacterSheets)
   .post(checkJwt, createCharacterSheet);
+router.route('/dev').delete(devDeleteCharacterSheet);
 router
   .route('/:id')
   .get(checkJwt, getCharacterSheet)
   .put(checkJwt, updateCharacterSheet)
   .delete(checkJwt, deleteCharacterSheet);
-router.route('/dev/:userToDelete').delete(devDeleteCharacterSheet);
 
 export default router;

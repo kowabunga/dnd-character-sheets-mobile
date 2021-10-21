@@ -19,7 +19,7 @@ const { expect } = chai;
 describe('dnd mobile app character tests', function () {
   it('Should delete user for testing if already exists', function (done) {
     chai
-      .request(url)
+      .request('http://localhost:8080/api/user')
       .delete('/dev/test@test.com')
       .end(function (err, res) {
         expect(err).to.be.null;
@@ -102,15 +102,15 @@ describe('dnd mobile app character tests', function () {
       });
   });
 
-  it('Should get current character sheet', function (done) {
+  it(`Should get character sheet from a given id`, function (done) {
     chai
       .request(url)
       .get(`/${characterSheets[0]._id}`)
-      .send('x-auth-token', result.body.token)
+      .set('x-auth-token', result.body.token)
       .end(function (err, res) {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
-        expect(res).to.be.json();
+        expect(res).to.be.json;
         done();
       });
   });
@@ -118,15 +118,43 @@ describe('dnd mobile app character tests', function () {
   it('Should fail to get charactersheet as name does not exist', function (done) {
     chai
       .request(url)
-      .get(`/qap3o9*#$fkhd`)
-      .send('x-auth-token', result.body.token)
+      .get(
+        `/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MTcxYzg1ZThmYjc1NjBmOTBhOGY3NDQiLCJpYXQiOjE2MzQ4NDY4MTUsImV4cCI6MTYzNTQ1MTYxNX0.KsVtjCUfv4UU-c0lv8D8BTiflRz2nuKTP3EpUImtAis`
+      ) //This is an old, but valid, mongodb _id
+      .set('x-auth-token', result.body.token)
       .end(function (err, res) {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
         expect(res).to.have.nested.property(
           'body.msg',
-          'Character sheet not found'
+          'Invalid character sheet id'
         );
+        done();
+      });
+  });
+
+  it('Should delete all character sheets', function (done) {
+    chai
+      .request(url)
+      .delete('/dev')
+      .end(function (err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('Should get all charactersheets after deleting', function (done) {
+    chai
+      .request(url)
+      .get('/')
+      .set('x-auth-token', result.body.token)
+      .end(function (err, res) {
+        characterSheets = res.body;
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(characterSheets).to.have.lengthOf(0);
         done();
       });
   });
