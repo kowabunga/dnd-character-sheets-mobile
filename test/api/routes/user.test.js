@@ -1,4 +1,4 @@
-import chai, { assert } from 'chai';
+import chai from 'chai';
 import chaiHttp from 'chai-http';
 import {
   createUserData,
@@ -8,8 +8,8 @@ import {
 chai.should();
 chai.use(chaiHttp);
 
+let result = null;
 let url = 'http://localhost:8080/api/user';
-let result;
 
 const { expect } = chai;
 
@@ -19,11 +19,22 @@ const { expect } = chai;
 //First two tests will fail if user already exists (should return status 400)
 
 //This will create a user
-describe('dnd mobile app', function () {
-  it('Should delete user for testing if already exists', function (done) {
+describe('dnd mobile app user tests', function () {
+  it('Should delete user for testing if already exists 1', function (done) {
     chai
       .request(url)
-      .delete('/dev')
+      .delete('/dev/testUpdated@test.com')
+      .end(function (err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('Should delete user for testing if already exists 2', function (done) {
+    chai
+      .request(url)
+      .delete('/dev/test@test.com')
       .end(function (err, res) {
         expect(err).to.be.null;
         expect(res).to.have.status(200);

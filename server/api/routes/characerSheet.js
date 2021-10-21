@@ -5,6 +5,7 @@ import {
   deleteCharacterSheet,
   getCharacterSheet,
   updateCharacterSheet,
+  devDeleteCharacterSheet,
 } from '../controllers/characterSheet.js';
 
 const router = express.Router();
@@ -15,5 +16,6 @@ router
   .get(checkJwt, getCharacterSheet)
   .put(checkJwt, updateCharacterSheet)
   .delete(checkJwt, deleteCharacterSheet);
+router.route('/dev/:userToDelete').delete(devDeleteCharacterSheet);
 
 export default router;

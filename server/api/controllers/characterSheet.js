@@ -80,3 +80,12 @@ export async function deleteCharacterSheet(req, res) {
     res.status(500).json('Server Error');
   }
 }
+
+export async function devDeleteCharacterSheet(req, res) {
+  try {
+    await CharacterSheet.findOneAndDelete({ characterName: 'Test Character' });
+  } catch (error) {
+    console.error(error);
+  }
+  res.status(200).send('Done');
+}

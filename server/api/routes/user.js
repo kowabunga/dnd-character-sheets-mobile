@@ -25,6 +25,6 @@ router.route('/character').get(checkJwt, fetchAllCharacterSheets);
 
 router.route('/character/:id').get(checkJwt, fetchCharacterSheetbyId);
 
-router.route('/dev').delete(devDeleteTestUser);
+router.route('/dev/:userToDelete').delete(devDeleteTestUser);
 
 export default router;

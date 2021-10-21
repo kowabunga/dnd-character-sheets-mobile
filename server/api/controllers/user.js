@@ -149,8 +149,9 @@ export async function fetchCharacterSheetbyId(req, res) {
 
 //For testing!
 export async function devDeleteTestUser(req, res) {
+  console.log(req.params.userToDelete);
   try {
-    await User.findOneAndDelete({ email: 'testUpdated@test.com' });
+    await User.findOneAndDelete({ email: req.params.userToDelete });
   } catch (error) {
     console.error(error);
   }
