@@ -5,7 +5,7 @@ import colors from 'colors';
 import connectDb from './config/db.js';
 import userRoutes from './api/routes/user.js';
 import authRoutes from './api/routes/auth.js';
-import characterRoutes from './api/routes/characerSheet.js';
+import characterRoutes from './api/routes/characterSheet.js';
 
 dotenv.config({ path: 'server/config/config.env' });
 

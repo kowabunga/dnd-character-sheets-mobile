@@ -23,6 +23,27 @@ export async function createCharacterSheet(req, res) {
   }
 }
 
+export async function getAllCharacterSheets(req, res) {
+  try {
+    const user = await User.findById(req.user);
+
+    if (!user) {
+      return res.status(400).json({ msg: 'No user found' });
+    }
+
+    let characterSheets = await CharacterSheet.find({ id: req.user });
+
+    if (!characterSheets) {
+      return res.status(400).json({ msg: 'No character sheets found' });
+    }
+
+    res.status(200).json(characterSheets);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json('Server Error');
+  }
+}
+
 export async function getCharacterSheet(req, res) {
   try {
     const user = await User.findById(req.user);
@@ -83,6 +104,8 @@ export async function deleteCharacterSheet(req, res) {
 
 export async function devDeleteCharacterSheet(req, res) {
   try {
+    // await CharacterSheet.deleteMany({});
+
     await CharacterSheet.findOneAndDelete({ characterName: 'Test Character' });
   } catch (error) {
     console.error(error);

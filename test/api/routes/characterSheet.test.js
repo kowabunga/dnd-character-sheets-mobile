@@ -2,6 +2,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import {
   characterData1,
+  characterData2,
   updatedCharacterData1,
 } from '../../../test_suite/data/characterSheetsData.js';
 
@@ -10,7 +11,7 @@ chai.use(chaiHttp);
 
 let url = 'http://localhost:8080/api/character';
 let result = null;
-let charName = null;
+let characterSheets = null;
 
 const { expect } = chai;
 
@@ -65,7 +66,6 @@ describe('dnd mobile app character tests', function () {
       .set('x-auth-token', result.body.token)
       .send(characterData1)
       .end(function (err, res) {
-        charName = res.body.characterName;
         expect(err).to.be.null;
         expect(res).to.have.status(201);
         expect(res).to.be.json;
@@ -73,11 +73,39 @@ describe('dnd mobile app character tests', function () {
       });
   });
 
-  it('Should get current character sheet', function (done) {
-    console.log(result);
+  it('Should create a second character sheet for previously created user', function (done) {
     chai
       .request(url)
-      .get(`/${result._id}`)
+      .post('/')
+      .set('x-auth-token', result.body.token)
+      .send(characterData2)
+      .end(function (err, res) {
+        expect(err).to.be.null;
+        expect(res).to.have.status(201);
+        expect(res).to.be.json;
+        done();
+      });
+  });
+
+  it('Should get all charactersheets', function (done) {
+    chai
+      .request(url)
+      .get('/')
+      .set('x-auth-token', result.body.token)
+      .end(function (err, res) {
+        characterSheets = res.body;
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(characterSheets).to.have.lengthOf(2);
+        done();
+      });
+  });
+
+  it('Should get current character sheet', function (done) {
+    chai
+      .request(url)
+      .get(`/${characterSheets[0]._id}`)
       .send('x-auth-token', result.body.token)
       .end(function (err, res) {
         expect(err).to.be.null;
