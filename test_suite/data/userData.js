@@ -13,4 +13,25 @@ const updatedUserData = {
   email: 'testUpdated@test.com',
 };
 
-export { createUserData, updatedUserData };
+const userDataLogin = {
+  email: 'test@test.com',
+  password: '123456',
+};
+
+const incorrectUserLoginPassword = {
+  email: 'test@test.com',
+  password: 'gs44haf',
+};
+
+const incorrectUserLoginEmail = {
+  email: 'test@tesdft.com',
+  password: '123456',
+};
+
+export {
+  createUserData,
+  updatedUserData,
+  userDataLogin,
+  incorrectUserLoginEmail,
+  incorrectUserLoginPassword,
+};

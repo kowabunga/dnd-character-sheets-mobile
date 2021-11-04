@@ -6,7 +6,6 @@ import {
   updatedCharacterData1,
 } from '../../../test_suite/data/characterSheetsData.js';
 
-chai.should();
 chai.use(chaiHttp);
 
 let url = 'http://localhost:8080/api/character';

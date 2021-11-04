@@ -5,7 +5,6 @@ import {
   updatedUserData,
 } from '../../../test_suite/data/userData.js';
 
-chai.should();
 chai.use(chaiHttp);
 
 let result = null;
