@@ -31,7 +31,7 @@ const LandingPage = () => {
               <div className='card-title lead fs-3 text-primary'>Campaigns</div>
               <div className='card-subtitle text-muted mb-3'>Adventure On</div>
               <p className='card-text'>
-                Open the door to a world of magic, and dungeons. Keep track of
+                Open the door to a world of magic and dungeons. Keep track of
                 who's in your campaign, their levels and more.
               </p>
             </div>
@@ -39,7 +39,7 @@ const LandingPage = () => {
           <div className='card w-100 w-sm-50 m-2 border-secondary hover-border h-100'>
             <div className='card-body'>
               <div className='icon-size mb-3 text-secondary text-center'>
-                <i class='bi bi-file-person'></i>
+                <i className='bi bi-file-person'></i>
               </div>
               <div className='card-title lead fs-3 text-primary'>
                 Characters

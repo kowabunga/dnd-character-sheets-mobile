@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha test/**/*.js --recursive",
-    "dev": "nodemon server/server.js"
+    "start": "node server/server",
+    "client": "npm start --prefix client",
+    "server": "nodemon server/server",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Anthony Siletti",
   "license": "MIT",
@@ -21,6 +24,7 @@
   },
   "devDependencies": {
     "colors": "^1.4.0",
+    "concurrently": "^6.4.0",
     "nodemon": "^2.0.12"
   },
   "type": "module"
