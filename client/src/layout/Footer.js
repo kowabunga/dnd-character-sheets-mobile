@@ -13,6 +13,9 @@ const Footer = () => {
         </div>
         <div className='d-flex flex-column align-items-center justify-content-center'>
           <h5>Support</h5>
+          <ul>
+            <li></li>
+          </ul>
         </div>
       </div>
     </footer>

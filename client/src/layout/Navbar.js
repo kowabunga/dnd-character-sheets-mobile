@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
@@ -17,19 +17,24 @@ const Navbar = () => {
         <div className='collapse navbar-collapse' id='navbarMain'>
           <ul className='navbar-nav ms-auto'>
             <li className='nav-item'>
-              <Link to='/signup' className='nav-link'>
-                Sign Up
-              </Link>
+              <NavLink to='/learn-more' className='nav-link'>
+                Learn More
+              </NavLink>
             </li>
             <li className='nav-item'>
-              <Link to='/user/campaigns' className='nav-link'>
+              <NavLink to='/user/campaigns' className='nav-link'>
                 Campaigns
-              </Link>
+              </NavLink>
             </li>
             <li className='nav-item'>
-              <Link to='/user/campaigns' className='nav-link'>
+              <NavLink to='/user/characters' className='nav-link'>
                 Characters
-              </Link>
+              </NavLink>
+            </li>
+            <li className='nav-item'>
+              <NavLink to='/signup' className='nav-link'>
+                Sign Up
+              </NavLink>
             </li>
           </ul>
         </div>
