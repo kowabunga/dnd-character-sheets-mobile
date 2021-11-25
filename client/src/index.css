@@ -1,4 +1,9 @@
 @import 'bootstrap-icons/font/bootstrap-icons.css';
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 .slight-text-shadow {
   text-shadow: 0 2px 3px #2f2e41;
 }
@@ -7,9 +12,6 @@
   font-size: 4rem;
 }
 
-.hover-border {
-  transition: 0.15s ease-in;
-}
-.hover-border:hover {
-  box-shadow: 0 0.25rem 0.75rem #ff6584;
+.card-background {
+  background-color: rgb(253, 253, 253) !important;
 }
