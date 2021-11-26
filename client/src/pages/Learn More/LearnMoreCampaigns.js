@@ -27,7 +27,7 @@ const LearnMoreCampaigns = () => {
           >
             <div className='accordion-body'>
               You can keep track of all the items you've created. All the cities
-              and npc's within and never loose track of what's where and when.
+              and npc's within and never lose track of what's where and when.
               (Don't worry - we've all lost our Dungeon Master book at one point
               or another).
             </div>
@@ -66,7 +66,9 @@ const LearnMoreCampaigns = () => {
               data-bs-toggle='collapse'
               data-bs-target='#collapse-q3'
             >
-              If one of my players links their account to my campaign, can they see sensitive information, such as stat blocks, yet-to-be discovered items, etc.?
+              If one of my players links their account to my campaign, can they
+              see sensitive information, such as stat blocks, yet-to-be
+              discovered items, etc.?
             </button>
           </h2>
           <div
@@ -75,7 +77,8 @@ const LearnMoreCampaigns = () => {
             data-bs-parent='#campaignAccordion'
           >
             <div className='accordion-body'>
-              No. A user can only associate their 
+              No. Once linked, a user can only see access to NPC's, items, and
+              other things that only you have selected to be seen.
             </div>
           </div>
         </div>

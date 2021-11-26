@@ -8,7 +8,7 @@ const LearnMoreCharacters = () => {
         to keep your character's safe and updated.
       </p>
       <p>
-        No more loosing your character sheets and having to remember how much
+        No more losing your character sheets and having to remember how much
         gold you had or what spell slots where left.
       </p>
       <div className='accordion' id='campaignAccordion'>

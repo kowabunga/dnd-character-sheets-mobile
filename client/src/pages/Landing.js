@@ -96,6 +96,14 @@ const LandingPage = () => {
               Build your campaigns, create your characters and conquer the world
               of your creations.
             </p>
+            <div className='d-md-flex align-items-center justify-content-around'>
+              <button className='btn btn-md-lg btn-outline-light m-1'>
+                Create Character
+              </button>
+              <button className='btn btn-md-lg btn-outline-light m-1'>
+                Create Campaign
+              </button>
+            </div>
           </div>
           <div>
             <img

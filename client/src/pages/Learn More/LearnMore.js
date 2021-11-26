@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import undrawEducation from '../../images/undraw_education_f8ru.svg';
 const LearnMore = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate(),
+    location = useLocation();
   useEffect(() => {
-    navigate('/learn-more/characters', { replace: true });
-  }, []);
+    if (location.pathname === '/learn-more') {
+      navigate('/learn-more/characters', { replace: true });
+    }
+  }, [navigate]);
 
   return (
     <>
@@ -27,10 +30,10 @@ const LearnMore = () => {
           </div>
         </div>
         <div className='mt-5 pt-4'>
-          <h3 className='mb-3'>
+          <h2 className='mb-3'>
             We offer services to help make your Dungeons & Dragons play seamless
             and convenient.
-          </h3>
+          </h2>
           <p className='fs-5'>
             As a player you can easily create a character and update its
             information when necessary - never loose that character sheet again!
@@ -41,10 +44,17 @@ const LearnMore = () => {
           </p>
         </div>
       </section>
+      <section className='mt-5 pb-3 border-bottom'>
+        <h2 className='text-center display-5'>Begin Today!</h2>
+        <div className='d-flex align-items-center justify-content-around'>
+          <button className='btn btn-lg btn-secondary'>Create Character</button>
+          <button className='btn btn-lg btn-outline-secondary'>
+            Create Campaign
+          </button>
+        </div>
+      </section>
       <section className='p-5'>
-        <h3 className='text-center text-capitalize'>
-          Learn more about what we can do by clicking below.
-        </h3>
+        <h3 className='text-center text-capitalize h2'>Learn More</h3>
         <nav>
           <ul className='nav nav-tabs d-flex justify-content-center'>
             <li className='nav-item mx-1'>
