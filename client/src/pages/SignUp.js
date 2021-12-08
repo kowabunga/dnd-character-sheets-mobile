@@ -4,7 +4,7 @@ const SignUpPage = () => {
   const submitHandler = e => {
     e.preventDefault();
     console.log('Submitting...');
-    axios.post('/user', {});
+    axios.post('api/user', {});
   };
   return (
     //   @TODO Maybe make grid columns to handle width?
@@ -16,16 +16,12 @@ const SignUpPage = () => {
             Name
           </label>
           <input type='text' className='form-control' id='name' required />
-          <div className='valid-feedback'>Awesome!</div>
-          <div className='invalid-feedback'>Please enter your name.</div>
         </div>
         <div className='mb-4'>
           <label htmlFor='email' className='form-label'>
             Email
           </label>
           <input type='email' className='form-control' id='email' required />
-          <div className='valid-feedback'>Awesome!</div>
-          <div className='invalid-feedback'>Please enter a valid email.</div>
         </div>
         <div className='mb-4'>
           <label htmlFor='passwordOne'>Password</label>
@@ -38,11 +34,6 @@ const SignUpPage = () => {
           <div id='passwordOneInfo' className='form-text'>
             Your password must be at least eight (8) characters long.
           </div>
-          <div className='valid-feedback'>Awesome!</div>
-          <div className='invalid-feedback'>
-            Please enter a valid password. It must be at least eight (8)
-            characters long.
-          </div>
         </div>
         <div className='mb-4'>
           <label htmlFor='passwordTwo'>Password</label>
@@ -54,11 +45,6 @@ const SignUpPage = () => {
           />
           <div id='passwordOneInfo' className='form-text'>
             Your password must be at least eight (8) characters long.
-          </div>
-          <div className='valid-feedback'>Awesome!</div>
-          <div className='invalid-feedback'>
-            Please enter a valid password. It must be at least eight (8)
-            characters long.
           </div>
         </div>
         <button type='submit' className='btn btn-secondary text-light mb-4'>
