@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import undrawEducation from '../../images/undraw_education_f8ru.svg';
-const LearnMore = () => {
+const LearnMorePage = () => {
   const navigate = useNavigate(),
     location = useLocation();
   useEffect(() => {
@@ -70,8 +70,11 @@ const LearnMore = () => {
           </ul>
         </nav>
       </section>
+      {location.pathname === '/learn-more' && (
+        <div className='space-maker'></div>
+      )}
       <Outlet />
     </>
   );
 };
-export default LearnMore;
+export default LearnMorePage;
