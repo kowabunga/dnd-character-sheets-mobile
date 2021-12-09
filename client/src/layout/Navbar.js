@@ -1,5 +1,10 @@
+import { useContext } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import UserContext from '../context/userContext';
 const Navbar = () => {
+  const userContext = useContext(UserContext);
+  const { jwt } = userContext;
+
   return (
     <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
       <div className='container'>
@@ -21,21 +26,34 @@ const Navbar = () => {
                 Learn More
               </NavLink>
             </li>
-            <li className='nav-item'>
-              <NavLink to='/user/campaigns' className='nav-link'>
-                Campaigns
-              </NavLink>
-            </li>
-            <li className='nav-item'>
-              <NavLink to='/user/characters' className='nav-link'>
-                Characters
-              </NavLink>
-            </li>
-            <li className='nav-item'>
-              <NavLink to='/signup' className='nav-link'>
-                Sign Up
-              </NavLink>
-            </li>
+            {jwt && (
+              <li className='nav-item'>
+                <NavLink to='/user/campaigns' className='nav-link'>
+                  Campaigns
+                </NavLink>
+              </li>
+            )}
+            {jwt && (
+              <li className='nav-item'>
+                <NavLink to='/user/characters' className='nav-link'>
+                  Characters
+                </NavLink>
+              </li>
+            )}
+            {!jwt && (
+              <li className='nav-item'>
+                <NavLink to='/signin' className='nav-link'>
+                  Sign In
+                </NavLink>
+              </li>
+            )}
+            {!jwt && (
+              <li className='nav-item'>
+                <NavLink to='/signup' className='nav-link'>
+                  Sign Up
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>

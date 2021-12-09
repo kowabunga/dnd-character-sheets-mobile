@@ -3,7 +3,7 @@ import undrawRightWay from '../images/undraw_right_direction_tge8.svg';
 
 const NotFoundPage = () => {
   return (
-    <section className='container mt-5 d-flex flex-column align-items-center justify-content-center '>
+    <section className='container p-5 d-flex flex-column align-items-center justify-content-center '>
       <img
         src={undrawRightWay}
         alt='drawing of night sky with moonlight and person at campfire'

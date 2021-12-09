@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import cors from 'cors';
 
 import connectDb from './config/db.js';
 import userRoutes from './api/routes/user.js';
@@ -13,6 +14,7 @@ connectDb();
 
 const app = express();
 
+app.use(cors());
 app.use(express.json({ extended: true }));
 
 app.use('/api/user', userRoutes);

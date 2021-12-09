@@ -11,22 +11,25 @@ import LearnMorePage from './pages/Learn More/LearnMorePage';
 import LearnMoreCharacters from './pages/Learn More/LearnMoreCharacter';
 import LearnMoreCampaigns from './pages/Learn More/LearnMoreCampaigns';
 import SignUpPage from './pages/SignUp';
+import UserState from './context/userState';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<App />}>
-          <Route index element={<LandingPage />} />
-          <Route path='learn-more' element={<LearnMorePage />}>
-            <Route path='characters' element={<LearnMoreCharacters />} />
-            <Route path='campaigns' element={<LearnMoreCampaigns />} />
+    <UserState>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<App />}>
+            <Route index element={<LandingPage />} />
+            <Route path='learn-more' element={<LearnMorePage />}>
+              <Route path='characters' element={<LearnMoreCharacters />} />
+              <Route path='campaigns' element={<LearnMoreCampaigns />} />
+            </Route>
+            <Route path='signup' element={<SignUpPage />} />
+            <Route path='*' element={<NotFoundPage />} />
           </Route>
-          <Route path='signup' element={<SignUpPage />} />
-          <Route path='*' element={<NotFoundPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </UserState>
   </React.StrictMode>,
   document.getElementById('root')
 );
