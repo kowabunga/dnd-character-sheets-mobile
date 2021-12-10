@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import UserContext from '../context/userContext';
 const Navbar = () => {
   const userContext = useContext(UserContext);
-  const { jwt } = userContext;
+  const { jwt, logUserOut } = userContext;
 
   return (
     <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
@@ -52,6 +52,13 @@ const Navbar = () => {
                 <NavLink to='/signup' className='nav-link'>
                   Sign Up
                 </NavLink>
+              </li>
+            )}
+            {jwt && (
+              <li className='nav-item' onClick={() => logUserOut()}>
+                <a className='nav-link' role='button'>
+                  Log out
+                </a>
               </li>
             )}
           </ul>
