@@ -1,17 +1,26 @@
-import { Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
 import UserContext from '../context/userContext';
 import Alert from '../components/Alert';
 
 // @TODO Redirect to user page after user is created
 const SignUpPage = () => {
   const userContext = useContext(UserContext);
-  const { signUpUser, createUserError } = userContext;
+  const { signUpUser, createUserError, jwt } = userContext;
+
+  const navigate = useNavigate();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  // If jwt is present (i.e. user account has been created), redirect to user page
+  useEffect(() => {
+    if (jwt) {
+      navigate('/user', { replace: true });
+    }
+  }, [jwt]);
 
   const submitHandler = e => {
     e.preventDefault();
