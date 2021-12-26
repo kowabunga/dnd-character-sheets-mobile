@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 //Create jwt with expiration date of now seven days
 export function signJwt(userId) {
   return jwt.sign(userId, process.env.SECRET, {
-    expiresIn: '7d',
+    expiresIn: 60 * 60 * 24 * 7,
   });
 }
 

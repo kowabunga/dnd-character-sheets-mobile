@@ -8,13 +8,13 @@ export async function login(req, res) {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).json({ msg: 'Email not registered. Sign up' });
+      return res.status(400).json({ msg: 'Email not registered. Sign up.' });
     }
 
     const passMatch = await user.checkPassword(password);
 
     if (!passMatch) {
-      return res.status(400).json({ msg: 'Incorrect password' });
+      return res.status(400).json({ msg: 'Incorrect password.' });
     }
 
     const token = signJwt({ userId: user._id });

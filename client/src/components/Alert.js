@@ -1,8 +1,9 @@
-const Alert = ({ alert, color, icon }) => {
+const Alert = ({ alert, color, icon, component }) => {
   return (
     <div className={` text-center lead text-danger text-underline mt-4`}>
-      <i class={`${icon} px-2`}></i>
+      <i className={`${icon} px-2`}></i>
       <span>{alert}</span>
+      {component && component}
     </div>
   );
 };

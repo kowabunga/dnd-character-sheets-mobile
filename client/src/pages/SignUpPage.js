@@ -3,14 +3,14 @@ import { useState, useContext, useEffect } from 'react';
 import UserContext from '../context/userContext';
 import Alert from '../components/Alert';
 
-// @TODO Redirect to user page after user is created
 const SignUpPage = () => {
   const userContext = useContext(UserContext);
-  const { signUpUser, createUserError, jwt } = userContext;
+  const { signUpUser, createUserError, jwt, clearAlert } = userContext;
 
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -20,11 +20,18 @@ const SignUpPage = () => {
     if (jwt) {
       navigate('/user', { replace: true });
     }
+
+    //Cleans up any alerts after page is exited
+    //Without this, error will persist after page change
+    return () => {
+      clearAlert('UP');
+    };
   }, [jwt]);
+  // })
 
   const submitHandler = e => {
     e.preventDefault();
-    signUpUser({ name, email, password, confirmPassword });
+    signUpUser({ firstName, lastName, email, password, confirmPassword });
   };
 
   return (
@@ -32,11 +39,16 @@ const SignUpPage = () => {
       <h1 className='display-5 text-center text-capitalize'>
         begin your adventure today
       </h1>
-      {createUserError !== null && (
+      {createUserError && (
         <Alert
           alert={createUserError.msg}
           color='danger'
           icon='bi bi-exclamation-circle'
+          component={
+            <Link to='/signin' className='d-block'>
+              Sign In
+            </Link>
+          }
         />
       )}
       <div className='row'>
@@ -44,18 +56,33 @@ const SignUpPage = () => {
           onSubmit={e => submitHandler(e)}
           className='p-3 col col-xl-6 mx-auto'
         >
-          <div className='mb-4'>
-            <label htmlFor='name' className='form-label '>
-              Name
-            </label>
-            <input
-              type='text'
-              className='form-control'
-              id='name'
-              value={name}
-              onChange={e => setName(e.target.value)}
-              required
-            />
+          <div className='row mb-4'>
+            <div className='col'>
+              <label htmlFor='name' className='form-label '>
+                First Name
+              </label>
+              <input
+                type='text'
+                className='form-control'
+                id='firstName'
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)}
+                required
+              />
+            </div>
+            <div className='col'>
+              <label htmlFor='name' className='form-label '>
+                Last Name
+              </label>
+              <input
+                type='text'
+                className='form-control'
+                id='lastName'
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
+                required
+              />
+            </div>
           </div>
           <div className='mb-4'>
             <label htmlFor='email' className='form-label'>

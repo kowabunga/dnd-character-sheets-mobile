@@ -7,6 +7,8 @@ import {
   SIGN_IN_USER_REQUEST,
   SIGN_IN_USER_SUCCESS,
   SIGN_USER_OUT,
+  REMOVE_USER_SIGN_IN_ERROR,
+  REMOVE_USER_SIGN_UP_ERROR,
 } from '../types/UserTypes';
 
 export default (state, action) => {
@@ -66,6 +68,16 @@ export default (state, action) => {
         ...state,
         signInUserError: payload,
         loading: false,
+      };
+    case REMOVE_USER_SIGN_IN_ERROR:
+      return {
+        ...state,
+        signInUserError: null,
+      };
+    case REMOVE_USER_SIGN_UP_ERROR:
+      return {
+        ...state,
+        createUserError: null,
       };
     default:
       break;

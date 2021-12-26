@@ -23,7 +23,7 @@ export async function fetchUser(req, res) {
 
 export async function createUser(req, res) {
   try {
-    const { name, email, password, confirmPassword } = req.body;
+    const { firstName, lastName, email, password, confirmPassword } = req.body;
 
     //Check if user already exists
     let user = await User.findOne({ email });
@@ -38,13 +38,14 @@ export async function createUser(req, res) {
       return res.status(400).json({ msg: 'Passwords do not match.' });
     }
 
-    user = await User.create({ name, email, password });
+    user = await User.create({ firstName, lastName, email, password });
 
     const token = signJwt({ userId: user._id });
 
     res.status(201).json({
       createdUser: {
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
       },
       token,
@@ -58,7 +59,14 @@ export async function createUser(req, res) {
 //Catch all function for any user update
 export async function updateUser(req, res) {
   try {
-    const { name, email, password, confirmPassword, oldPassword } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      oldPassword,
+    } = req.body;
 
     const user = await User.findById(req.user);
 
@@ -68,7 +76,8 @@ export async function updateUser(req, res) {
         .json({ msg: 'User cannot be found. Please try again' });
 
     //Check if value is updated (will be undefined if not), then perform update
-    if (name) user.name = name;
+    if (firstName) user.firstName = firstName;
+    if (lastName) user.lastName = lastName;
     if (email) user.email = email;
 
     //Check if password is to be changed. If so, compare new password to old password. If it matches, update password

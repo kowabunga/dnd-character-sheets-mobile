@@ -11,6 +11,8 @@ import {
   SIGN_IN_USER_REQUEST,
   SIGN_IN_USER_SUCCESS,
   SIGN_USER_OUT,
+  REMOVE_USER_SIGN_UP_ERROR,
+  REMOVE_USER_SIGN_IN_ERROR,
 } from '../types/UserTypes';
 
 const UserState = props => {
@@ -37,17 +39,27 @@ const UserState = props => {
   };
 
   const logUserOut = () => {
+    if (localStorage.getItem('dndtogojwt') !== null) {
+      localStorage.removeItem('dndtogojwt');
+    }
     dispatch({ type: SIGN_USER_OUT });
   };
 
-  const signUpUser = async ({ name, email, password, confirmPassword }) => {
+  const signUpUser = async ({
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+  }) => {
     try {
       dispatch({ type: CREATE_USER_REQUEST });
 
       const { data } = await axios.post(
         '/api/user',
         {
-          name,
+          firstName,
+          lastName,
           email,
           password,
           confirmPassword,
@@ -90,10 +102,23 @@ const UserState = props => {
 
       retrieveOrSaveJWT(data);
     } catch (error) {
+      // console.log([error]);
+      console.log(error.response.data);
       dispatch({
         type: SIGN_IN_USER_FAIL,
-        paylaod: error.response && error.response.msg,
+        payload: error.response && error.response.data,
       });
+    }
+  };
+
+  const clearAlert = type => {
+    switch (type) {
+      case 'IN':
+        dispatch({ type: REMOVE_USER_SIGN_IN_ERROR });
+      case 'UP':
+        dispatch({ type: REMOVE_USER_SIGN_UP_ERROR });
+      default:
+        break;
     }
   };
 
@@ -104,6 +129,7 @@ const UserState = props => {
         signUpUser,
         signInUser,
         logUserOut,
+        clearAlert,
         user,
         jwt,
         createUserError,

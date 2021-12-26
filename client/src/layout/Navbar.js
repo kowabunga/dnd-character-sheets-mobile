@@ -3,7 +3,11 @@ import { NavLink, Link } from 'react-router-dom';
 import UserContext from '../context/userContext';
 const Navbar = () => {
   const userContext = useContext(UserContext);
-  const { jwt, logUserOut } = userContext;
+  const {
+    jwt,
+    logUserOut,
+    user: { firstName },
+  } = userContext;
 
   return (
     <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
@@ -27,17 +31,33 @@ const Navbar = () => {
               </NavLink>
             </li>
             {jwt && (
-              <li className='nav-item'>
-                <NavLink to='/user/campaigns' className='nav-link'>
-                  Campaigns
-                </NavLink>
-              </li>
-            )}
-            {jwt && (
-              <li className='nav-item'>
-                <NavLink to='/user/characters' className='nav-link'>
-                  Characters
-                </NavLink>
+              <li className='nav-item dropdown '>
+                <a
+                  href='#'
+                  className='nav-link dropdown-toggle'
+                  id='navbarDropdown'
+                  role='button'
+                  data-bs-toggle='dropdown'
+                >
+                  {`Hey, ${firstName} `}
+                </a>
+                <ul className='dropdown-menu dropdown-menu-dark'>
+                  <li className='dropdown-item'>
+                    <NavLink to='/user/characters' className='nav-link'>
+                      Characters
+                    </NavLink>
+                  </li>
+                  <li className='dropdown-item'>
+                    <NavLink to='/user/campaigns' className='nav-link'>
+                      Campaigns
+                    </NavLink>
+                  </li>
+                  <li className='dropdown-item'>
+                    <NavLink to='/user/#' className='nav-link'>
+                      Account
+                    </NavLink>
+                  </li>
+                </ul>
               </li>
             )}
             {!jwt && (

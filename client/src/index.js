@@ -14,6 +14,7 @@ import LearnMoreCampaigns from './pages/Learn More/LearnMoreCampaigns';
 import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 import UserState from './context/userState';
+import UserPage from './pages/User/User';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -28,6 +29,14 @@ ReactDOM.render(
             </Route>
             <Route path='signup' element={<SignUpPage />} />
             <Route path='signin' element={<SignInPage />} />
+            <Route
+              path='user'
+              element={
+                <PrivateRoute>
+                  <UserPage />
+                </PrivateRoute>
+              }
+            />
             <Route path='*' element={<NotFoundPage />} />
           </Route>
         </Routes>

@@ -5,7 +5,7 @@ import Alert from '../components/Alert';
 
 const SignInPage = () => {
   const userContext = useContext(UserContext);
-  const { signInUser, signInUserError, jwt } = userContext;
+  const { signInUser, signInUserError, jwt, clearAlert } = userContext;
 
   const navigate = useNavigate();
 
@@ -17,6 +17,10 @@ const SignInPage = () => {
     if (jwt) {
       navigate('/user', { replace: true });
     }
+
+    return () => {
+      clearAlert('IN');
+    };
   }, [jwt]);
 
   const submitHandler = e => {
@@ -29,11 +33,18 @@ const SignInPage = () => {
       <h1 className='display-5 text-center text-capitalize'>
         continue the adventure
       </h1>
-      {signInUserError !== null && (
+      {signInUserError && (
         <Alert
           alert={signInUserError.msg}
           color='danger'
           icon='bi bi-exclamation-circle'
+          component={
+            signInUserError.msg === 'Email not registered. Sign up.' && (
+              <Link to='/signup' className='d-block'>
+                Sign Up
+              </Link>
+            )
+          }
         />
       )}
       <div className='row'>
