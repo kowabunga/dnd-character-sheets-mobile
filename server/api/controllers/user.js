@@ -7,7 +7,7 @@ export async function fetchUser(req, res) {
     //User must be logged in for this to work!
     //Get user by id extracted from jwt
     const user = await User.findById(req.user)
-      .select('_id name email')
+      .select('_id email firstName lastName')
       .populate('characters');
 
     if (!user) {

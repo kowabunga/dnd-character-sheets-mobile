@@ -9,6 +9,9 @@ import {
   SIGN_USER_OUT,
   REMOVE_USER_SIGN_IN_ERROR,
   REMOVE_USER_SIGN_UP_ERROR,
+  GET_USER_INFO_SUCCESS,
+  GET_USER_INFO_REQUEST,
+  GET_USER_INFO_FAIL,
 } from '../types/UserTypes';
 
 export default (state, action) => {
@@ -32,9 +35,16 @@ export default (state, action) => {
 
     case CREATE_USER_REQUEST:
     case SIGN_IN_USER_REQUEST:
+    case GET_USER_INFO_REQUEST:
       return {
         ...state,
         loading: true,
+      };
+
+    case GET_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        user: payload,
       };
 
     case CREATE_USER_SUCCESS:
@@ -63,17 +73,20 @@ export default (state, action) => {
         loading: false,
       };
 
+    case GET_USER_INFO_FAIL:
     case SIGN_IN_USER_FAIL:
       return {
         ...state,
         signInUserError: payload,
         loading: false,
       };
+
     case REMOVE_USER_SIGN_IN_ERROR:
       return {
         ...state,
         signInUserError: null,
       };
+
     case REMOVE_USER_SIGN_UP_ERROR:
       return {
         ...state,

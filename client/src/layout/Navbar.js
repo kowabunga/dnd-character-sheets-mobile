@@ -57,6 +57,14 @@ const Navbar = () => {
                       Account
                     </NavLink>
                   </li>
+                  <li>
+                    <hr className='dropdown-divider' />
+                  </li>
+                  <li className='dropdown-item' onClick={() => logUserOut()}>
+                    <NavLink className='nav-link' role='button' to='/#'>
+                      Sign Out
+                    </NavLink>
+                  </li>
                 </ul>
               </li>
             )}
@@ -72,13 +80,6 @@ const Navbar = () => {
                 <NavLink to='/signup' className='nav-link'>
                   Sign Up
                 </NavLink>
-              </li>
-            )}
-            {jwt && (
-              <li className='nav-item' onClick={() => logUserOut()}>
-                <a className='nav-link' role='button'>
-                  Log out
-                </a>
               </li>
             )}
           </ul>

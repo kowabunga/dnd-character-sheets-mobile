@@ -13,6 +13,9 @@ import {
   SIGN_USER_OUT,
   REMOVE_USER_SIGN_UP_ERROR,
   REMOVE_USER_SIGN_IN_ERROR,
+  GET_USER_INFO_REQUEST,
+  GET_USER_INFO_FAIL,
+  GET_USER_INFO_SUCCESS,
 } from '../types/UserTypes';
 
 const UserState = props => {
@@ -29,8 +32,11 @@ const UserState = props => {
   const { user, jwt, createUserError, signInUserError, loading } = state;
 
   const retrieveOrSaveJWT = token => {
-    if (localStorage.getItem('dndtogojwt') !== null) {
+    if (localStorage.getItem('dndtogojwt') !== null && jwt === null) {
       dispatch({ type: SET_JWT, payload: localStorage.getItem('dndtogojwt') });
+
+      //If JWT is present, get user info from DB
+      getUserData();
     } else {
       token !== null &&
         token !== undefined &&
@@ -43,6 +49,29 @@ const UserState = props => {
       localStorage.removeItem('dndtogojwt');
     }
     dispatch({ type: SIGN_USER_OUT });
+  };
+
+  const getUserData = async () => {
+    try {
+      dispatch({ type: GET_USER_INFO_REQUEST });
+
+      const tempJwt =
+        localStorage.getItem('dndtogojwt') !== null &&
+        localStorage.getItem('dndtogojwt');
+
+      const { data } = await axios.get('/api/user', {
+        headers: {
+          'x-auth-token': tempJwt,
+        },
+      });
+      dispatch({ type: GET_USER_INFO_SUCCESS, payload: data });
+      return data;
+    } catch (error) {
+      dispatch({
+        type: GET_USER_INFO_FAIL,
+        payload: error.response && error.response.data,
+      });
+    }
   };
 
   const signUpUser = async ({
@@ -75,8 +104,6 @@ const UserState = props => {
 
       retrieveOrSaveJWT(data.token);
     } catch (error) {
-      console.log(typeof error);
-      console.log([error]);
       dispatch({
         type: CREATE_USER_FAIL,
         payload: error.response && error.response.data,
@@ -101,9 +128,8 @@ const UserState = props => {
       dispatch({ type: SIGN_IN_USER_SUCCESS, payload: data });
 
       retrieveOrSaveJWT(data);
+      getUserData();
     } catch (error) {
-      // console.log([error]);
-      console.log(error.response.data);
       dispatch({
         type: SIGN_IN_USER_FAIL,
         payload: error.response && error.response.data,
@@ -115,8 +141,10 @@ const UserState = props => {
     switch (type) {
       case 'IN':
         dispatch({ type: REMOVE_USER_SIGN_IN_ERROR });
+        break;
       case 'UP':
         dispatch({ type: REMOVE_USER_SIGN_UP_ERROR });
+        break;
       default:
         break;
     }
@@ -130,6 +158,7 @@ const UserState = props => {
         signInUser,
         logUserOut,
         clearAlert,
+        getUserData,
         user,
         jwt,
         createUserError,

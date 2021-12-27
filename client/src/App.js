@@ -6,14 +6,14 @@ import Navbar from './layout/Navbar';
 
 function App() {
   const userContext = useContext(UserContext);
-  const { retrieveOrSaveJWT } = userContext;
+  const { retrieveOrSaveJWT, jwt } = userContext;
 
   useEffect(() => {
     retrieveOrSaveJWT();
-  }, []);
+  }, [jwt]);
 
   return (
-    <main>
+    <main className='d-flex flex-column h-100'>
       <Navbar />
       <Outlet />
       <Footer />

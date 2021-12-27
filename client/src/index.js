@@ -15,6 +15,9 @@ import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 import UserState from './context/userState';
 import UserPage from './pages/User/User';
+import UserCharactersPage from './pages/User/Characters';
+import UserCampaignsPage from './pages/User/Campaigns';
+import UserAccountPage from './pages/User/Account';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -36,7 +39,33 @@ ReactDOM.render(
                   <UserPage />
                 </PrivateRoute>
               }
-            />
+            >
+              <Route
+                index
+                element={
+                  <PrivateRoute>
+                    <UserAccountPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='characters'
+                element={
+                  <PrivateRoute>
+                    <UserCharactersPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path='campaigns'
+                element={
+                  <PrivateRoute>
+                    <UserCampaignsPage />
+                  </PrivateRoute>
+                }
+              />
+            </Route>
+
             <Route path='*' element={<NotFoundPage />} />
           </Route>
         </Routes>
