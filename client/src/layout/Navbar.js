@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import UserContext from '../context/userContext';
 const Navbar = () => {
@@ -39,7 +39,7 @@ const Navbar = () => {
                   role='button'
                   data-bs-toggle='dropdown'
                 >
-                  {`Hey, ${firstName} `}
+                  {`Hey ${firstName ? `, ${firstName}` : ''} `}
                 </a>
                 <ul className='dropdown-menu dropdown-menu-dark'>
                   <li className='dropdown-item'>

@@ -18,6 +18,7 @@ import UserPage from './pages/User/User';
 import UserCharactersPage from './pages/User/Characters';
 import UserCampaignsPage from './pages/User/Campaigns';
 import UserAccountPage from './pages/User/Account';
+import AccountInfo from './pages/User/AccountInfo';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -45,6 +46,15 @@ ReactDOM.render(
                 element={
                   <PrivateRoute>
                     <UserAccountPage />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route
+                path='account-info'
+                element={
+                  <PrivateRoute>
+                    <AccountInfo />
                   </PrivateRoute>
                 }
               />

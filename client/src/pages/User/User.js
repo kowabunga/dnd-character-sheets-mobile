@@ -13,6 +13,17 @@ const UserPage = () => {
               id='user-pills-tab'
               role='tablist'
             >
+              <li className='nav-item  mb-1'>
+                <NavLink
+                  className={`nav-link special-nav-link ${
+                    location.pathname === '/user' && 'active'
+                  } `}
+                  id='user-pills-settings-tab'
+                  to='/user/#'
+                >
+                  Account
+                </NavLink>
+              </li>
               <li className='nav-item mb-1'>
                 <NavLink
                   className='nav-link special-nav-link'
@@ -22,24 +33,13 @@ const UserPage = () => {
                   Characters
                 </NavLink>
               </li>
-              <li className='nav-item mb-1'>
+              <li className='nav-item'>
                 <NavLink
                   className='nav-link special-nav-link'
                   id='user-pills-campaigns-tab'
                   to='/user/campaigns'
                 >
                   Campaigns
-                </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink
-                  className={`nav-link special-nav-link ${
-                    location.pathname === '/user' && 'active'
-                  } `}
-                  id='user-pills-settings-tab'
-                  to='/user/#'
-                >
-                  Account
                 </NavLink>
               </li>
             </ul>
