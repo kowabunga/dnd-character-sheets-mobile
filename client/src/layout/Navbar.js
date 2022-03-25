@@ -39,7 +39,7 @@ const Navbar = () => {
                   role='button'
                   data-bs-toggle='dropdown'
                 >
-                  {`Hey ${firstName ? `, ${firstName}` : ''} `}
+                  {`Hey${firstName ? `, ${firstName}` : ''} `}
                 </a>
                 <ul className='dropdown-menu dropdown-menu-dark'>
                   <li className='dropdown-item'>

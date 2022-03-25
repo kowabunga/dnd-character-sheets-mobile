@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import UserContext from '../../context/userContext';
 import { Link } from 'react-router-dom';
 
-const AccountInfo = () => {
+const AccountInfoPage = () => {
   const userContext = useContext(UserContext);
   const {
     user: { firstName, lastName, email },
@@ -24,17 +24,17 @@ const AccountInfo = () => {
         <p className='ps-2'>{email}</p>
 
         <p>If you want to edit any of the above information, click below.</p>
-        <Link to='#' className='btn btn-primary  text-white'>
+        <Link to='/user/edit-user' className='btn btn-primary  text-white'>
           Edit User Information
         </Link>
         <hr />
         <h2>Password:</h2>
         <p>Edit your password below.</p>
-        <Link to='#' className='btn btn-primary text-white'>
+        <Link to='/user/edit-password' className='btn btn-primary text-white'>
           Edit Password
         </Link>
       </div>
     </section>
   );
 };
-export default AccountInfo;
+export default AccountInfoPage;

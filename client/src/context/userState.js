@@ -16,6 +16,10 @@ import {
   GET_USER_INFO_REQUEST,
   GET_USER_INFO_FAIL,
   GET_USER_INFO_SUCCESS,
+  EDIT_USER_INFO_REQUEST,
+  EDIT_USER_INFO_SUCCESS,
+  EDIT_USER_INFO_FAIL,
+  CLEAR_USER_EDIT_SUCCESS_MSG,
 } from '../types/UserTypes';
 
 const UserState = props => {
@@ -25,11 +29,21 @@ const UserState = props => {
     loading: false,
     createUserError: null,
     signInUserError: null,
+    editUserError: null,
+    editUserSuccess: null,
   };
 
   const [state, dispatch] = useReducer(UserReducer, initialState);
 
-  const { user, jwt, createUserError, signInUserError, loading } = state;
+  const {
+    user,
+    jwt,
+    createUserError,
+    signInUserError,
+    loading,
+    editUserError,
+    editUserSuccess,
+  } = state;
 
   const retrieveOrSaveJWT = token => {
     if (localStorage.getItem('dndtogojwt') !== null && jwt === null) {
@@ -137,6 +151,49 @@ const UserState = props => {
     }
   };
 
+  const editUserInfo = async ({
+    firstNameInput,
+    lastNameInput,
+    emailInput,
+    oldPassword,
+    newPassword,
+    confirmNewPassword,
+  }) => {
+    console.log('here');
+    try {
+      const tempJwt =
+        localStorage.getItem('dndtogojwt') !== null &&
+        localStorage.getItem('dndtogojwt');
+
+      dispatch({ type: EDIT_USER_INFO_REQUEST });
+
+      const { data } = await axios.put(
+        '/api/user',
+        {
+          firstName: firstNameInput,
+          lastName: lastNameInput,
+          email: emailInput,
+          oldPassword,
+          newPassword,
+          confirmNewPassword,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': tempJwt,
+          },
+        }
+      );
+
+      dispatch({ type: EDIT_USER_INFO_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: EDIT_USER_INFO_FAIL,
+        payload: error.response && error.response.data,
+      });
+    }
+  };
+
   const clearAlert = type => {
     switch (type) {
       case 'IN':
@@ -150,6 +207,10 @@ const UserState = props => {
     }
   };
 
+  const removeUserSuccessMsg = () => {
+    dispatch({type:CLEAR_USER_EDIT_SUCCESS_MSG})
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -159,11 +220,14 @@ const UserState = props => {
         logUserOut,
         clearAlert,
         getUserData,
+        editUserInfo,
+        removeUserSuccessMsg,
         user,
         jwt,
         createUserError,
         signInUserError,
         loading,
+        editUserSuccess,
       }}
     >
       {props.children}

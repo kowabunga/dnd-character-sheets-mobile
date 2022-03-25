@@ -63,10 +63,11 @@ export async function updateUser(req, res) {
       firstName,
       lastName,
       email,
-      password,
-      confirmPassword,
       oldPassword,
+      newPassword,
+      confirmPassword,
     } = req.body;
+    console.log('now here');
 
     const user = await User.findById(req.user);
 
@@ -83,10 +84,22 @@ export async function updateUser(req, res) {
     //Check if password is to be changed. If so, compare new password to old password. If it matches, update password
     if (oldPassword) {
       const passwordMatch = user.checkPassword(oldPassword);
-      if (passwordMatch && password === confirmPassword)
-        user.password = password;
+
+      if (!passwordMatch || newPassword !== confirmPassword) {
+        return res.status(400).json({ msg: 'Passwords do not match.' });
+      }
+
+      if (user.checkPasswordLength(password)) {
+        return res.status(400).json({
+          msg: 'Password must be at least eight (8) characters long.',
+        });
+      }
+
+      if (passwordMatch && newPassword === confirmPassword)
+        user.password = newPassword;
     }
 
+    console.log(user);
     //Save updates to db
     user.save();
     res.status(201).json({ msg: 'Profile updated' });

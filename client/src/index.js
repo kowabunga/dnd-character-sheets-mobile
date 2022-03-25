@@ -18,7 +18,9 @@ import UserPage from './pages/User/User';
 import UserCharactersPage from './pages/User/Characters';
 import UserCampaignsPage from './pages/User/Campaigns';
 import UserAccountPage from './pages/User/Account';
-import AccountInfo from './pages/User/AccountInfo';
+import AccountInfoPage from './pages/User/AccountInfo';
+import UserEditPage from './pages/User/Edit/User';
+import UserEditPassword from './pages/User/Edit/Password';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -54,10 +56,29 @@ ReactDOM.render(
                 path='account-info'
                 element={
                   <PrivateRoute>
-                    <AccountInfo />
+                    <AccountInfoPage />
                   </PrivateRoute>
                 }
               />
+
+              <Route
+                path='edit-user'
+                element={
+                  <PrivateRoute>
+                    <UserEditPage />
+                  </PrivateRoute>
+                }
+              />
+
+              <Route
+                path='edit-password'
+                element={
+                  <PrivateRoute>
+                    <UserEditPassword />
+                  </PrivateRoute>
+                }
+              />
+
               <Route
                 path='characters'
                 element={

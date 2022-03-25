@@ -12,6 +12,10 @@ import {
   GET_USER_INFO_SUCCESS,
   GET_USER_INFO_REQUEST,
   GET_USER_INFO_FAIL,
+  EDIT_USER_INFO_REQUEST,
+  EDIT_USER_INFO_SUCCESS,
+  EDIT_USER_INFO_FAIL,
+  CLEAR_USER_EDIT_SUCCESS_MSG,
 } from '../types/UserTypes';
 
 export default (state, action) => {
@@ -36,6 +40,7 @@ export default (state, action) => {
     case CREATE_USER_REQUEST:
     case SIGN_IN_USER_REQUEST:
     case GET_USER_INFO_REQUEST:
+    case EDIT_USER_INFO_REQUEST:
       return {
         ...state,
         loading: true,
@@ -66,6 +71,15 @@ export default (state, action) => {
         signInUserError: null,
       };
 
+    case EDIT_USER_INFO_SUCCESS:
+      return {
+        ...state,
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        email: payload.email,
+        editUserSuccess: true,
+      };
+
     case CREATE_USER_FAIL:
       return {
         ...state,
@@ -81,6 +95,13 @@ export default (state, action) => {
         loading: false,
       };
 
+    case EDIT_USER_INFO_FAIL:
+      console.log({ payload });
+      return {
+        ...state,
+        editUserError: payload.msg,
+      };
+
     case REMOVE_USER_SIGN_IN_ERROR:
       return {
         ...state,
@@ -92,6 +113,13 @@ export default (state, action) => {
         ...state,
         createUserError: null,
       };
+
+    case CLEAR_USER_EDIT_SUCCESS_MSG:
+      return {
+        ...state,
+        editUserSuccess: false,
+      };
+
     default:
       break;
   }

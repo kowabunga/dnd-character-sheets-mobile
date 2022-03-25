@@ -18,7 +18,6 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 8,
   },
   characters: [
     {
@@ -54,6 +53,10 @@ UserSchema.pre('save', async function (next) {
 //Check if password submitted via login is same as hashed password saved in db
 UserSchema.methods.checkPassword = async function (oldPassword) {
   return await bcrypt.compare(oldPassword, this.password);
+};
+
+UserSchema.methods.checkPasswordLength = async function (password) {
+  return password.length < 8;
 };
 
 const User = mongoose.model('user', UserSchema);
