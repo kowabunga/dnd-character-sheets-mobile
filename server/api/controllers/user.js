@@ -102,7 +102,9 @@ export async function updateUser(req, res) {
     console.log(user);
     //Save updates to db
     user.save();
-    res.status(201).json({ msg: 'Profile updated' });
+    res
+      .status(201)
+      .json({ msg: 'Profile updated', info: { firstName, lastName, email } });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');

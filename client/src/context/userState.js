@@ -78,6 +78,8 @@ const UserState = props => {
           'x-auth-token': tempJwt,
         },
       });
+
+      console.log(data);
       dispatch({ type: GET_USER_INFO_SUCCESS, payload: data });
       return data;
     } catch (error) {
@@ -85,6 +87,8 @@ const UserState = props => {
         type: GET_USER_INFO_FAIL,
         payload: error.response && error.response.data,
       });
+
+      logUserOut();
     }
   };
 
@@ -186,6 +190,8 @@ const UserState = props => {
       );
 
       dispatch({ type: EDIT_USER_INFO_SUCCESS, payload: data });
+
+      return data;
     } catch (error) {
       dispatch({
         type: EDIT_USER_INFO_FAIL,
@@ -208,7 +214,7 @@ const UserState = props => {
   };
 
   const removeUserSuccessMsg = () => {
-    dispatch({type:CLEAR_USER_EDIT_SUCCESS_MSG})
+    dispatch({ type: CLEAR_USER_EDIT_SUCCESS_MSG });
   };
 
   return (

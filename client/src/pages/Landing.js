@@ -9,7 +9,7 @@ const LandingPage = () => {
         <img
           src={unsplashMoon}
           alt='drawing of night sky with moonlight and person at campfire'
-          className='img-fluid mx-auto'
+          className='img-fluid mx-auto no-interact'
         />
         <div className='text-white position-absolute top-50 start-50 translate-middle'>
           <h1 className='display-4 slight-text-shadow'>

@@ -11,7 +11,7 @@ const UserAccountPage = () => {
   const userCards = [
     {
       title: 'Account',
-      description: 'View and update your information here.',
+      description: 'View and update your account',
       icon: 'bi bi-person-circle',
       link: '/user/account-info',
     },

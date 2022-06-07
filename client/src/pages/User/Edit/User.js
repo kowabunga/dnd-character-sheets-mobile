@@ -22,18 +22,23 @@ const UserEditPage = () => {
 
   const [loader, showLoader] = useState(false);
 
-  const submitHandler = e => {
+  const submitHandler = async e => {
     e.preventDefault();
-    console.log({ firstNameInput, lastNameInput, emailInput });
 
     showLoader(true);
 
-    editUserInfo({ firstNameInput, lastNameInput, emailInput });
+    const data = await editUserInfo({
+      firstNameInput,
+      lastNameInput,
+      emailInput,
+    });
+
+    showLoader(false);
   };
 
   useEffect(() => {
     if (editUserSuccess) {
-      navigate('/user', { replace: true });
+      navigate('/user/account-info', { replace: true });
     }
 
     return () => {
@@ -54,6 +59,7 @@ const UserEditPage = () => {
               icon='bi bi-exclamation-circle'
             />
           )}
+
           <h2>Edit Information</h2>
           <p className='lead'>Here's to making you more like you.</p>
 

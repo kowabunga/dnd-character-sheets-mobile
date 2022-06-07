@@ -43,6 +43,11 @@ const Navbar = () => {
                 </a>
                 <ul className='dropdown-menu dropdown-menu-dark'>
                   <li className='dropdown-item'>
+                    <NavLink to='/user/#' className='nav-link'>
+                      Account
+                    </NavLink>
+                  </li>
+                  <li className='dropdown-item'>
                     <NavLink to='/user/characters' className='nav-link'>
                       Characters
                     </NavLink>
@@ -50,11 +55,6 @@ const Navbar = () => {
                   <li className='dropdown-item'>
                     <NavLink to='/user/campaigns' className='nav-link'>
                       Campaigns
-                    </NavLink>
-                  </li>
-                  <li className='dropdown-item'>
-                    <NavLink to='/user/#' className='nav-link'>
-                      Account
                     </NavLink>
                   </li>
                   <li>

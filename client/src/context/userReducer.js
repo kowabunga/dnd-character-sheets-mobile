@@ -72,11 +72,14 @@ export default (state, action) => {
       };
 
     case EDIT_USER_INFO_SUCCESS:
+      console.log({ payload });
       return {
         ...state,
-        firstName: payload.firstName,
-        lastName: payload.lastName,
-        email: payload.email,
+        user: {
+          firstName: payload.info.firstName,
+          lastName: payload.info.lastName,
+          email: payload.info.email,
+        },
         editUserSuccess: true,
       };
 
